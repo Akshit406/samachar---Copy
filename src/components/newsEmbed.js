@@ -1,13 +1,14 @@
+// components/newsEmbed.js
+
 import { EmbedBuilder } from 'discord.js';
 
-export function createNewsEmbed(newsItem, index = 0, total = 1, category = '') {
+export function createNewsEmbed(article, index, total, category) {
   return new EmbedBuilder()
-    .setTitle(newsItem.title || 'Untitled')
-    .setURL(newsItem.url || 'https://inshorts.com/')
-    .setDescription(newsItem.content || 'No content available.')
-    .setImage(newsItem.imageUrl || null)
-    .setFooter({
-      text: `📰 Source: Inshorts • Article ${index + 1}/${total} • Category: ${category.replace(/_/g, ' ')}`,
-    })
-    .setTimestamp(new Date(newsItem.date || Date.now()));
+    .setTitle(article.title)
+    .setDescription(article.content)
+    .setURL(article.url)
+    .setImage(article.imageUrl)
+    .setFooter({ text: `By ${article.author || 'Inshorts'} | ${article.date}` })
+    .setColor(0x007acc)
+    .setAuthor({ name: `${category.replace(/_/g, ' ').toUpperCase()} | Article ${index + 1} of ${total}` });
 }
