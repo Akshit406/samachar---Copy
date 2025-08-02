@@ -1,3 +1,5 @@
+// interactions/handleCategorySelect.js
+
 import { fetchArticlesByCategory } from '../services/inshortsApi.js';
 import { createNewsEmbed } from '../components/newsEmbed.js';
 import { createPaginationButtons } from '../components/paginationButtons.js';
@@ -7,28 +9,29 @@ export async function handleCategorySelect(interaction) {
   const selected = interaction.values[0];
   const userId = interaction.user.id;
 
-  await interaction.deferUpdate(); // Optional: shows "thinking..." for smoother UX
+  await interaction.deferUpdate();
 
-  const news = await fetchArticlesByCategory(selected);
-  if (!news || news.length === 0) {
+  const articles = await fetchArticlesByCategory(selected, userId);
+
+  if (!articles || articles.length === 0) {
     return interaction.followUp({
       content: '⚠️ Could not fetch news for that category.',
       ephemeral: true,
     });
   }
 
-  // Save session
+  // Save session using correct key: `articles`
   updateUserSession(userId, {
-    news,
+    articles,
     index: 0,
     category: selected,
   });
 
-  const embed = createNewsEmbed(news[0], 0, news.length, selected);
-  const buttons = createPaginationButtons();
+  const embed = createNewsEmbed(articles[0], 0, articles.length, selected);
+  const buttons = createPaginationButtons(0, articles.length);
 
   await interaction.editReply({
-    content: `📰 News in **${selected.replace(/_/g, ' ')}**`,
+    content: `📰 News in **${selected.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}**`,
     embeds: [embed],
     components: [buttons],
   });
