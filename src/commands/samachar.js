@@ -1,3 +1,5 @@
+// commands/samachar.js
+
 import { SlashCommandBuilder } from 'discord.js';
 import { createCategorySelectMenu } from '../components/categorySelectMenu.js';
 
@@ -7,12 +9,12 @@ export default {
     .setDescription('Get real-time news from Inshorts by category'),
 
   async execute(interaction) {
-    const selectMenuRow = createCategorySelectMenu(); // already includes ActionRowBuilder
+    const categoryMenu = createCategorySelectMenu();
 
     await interaction.reply({
       content: '🗂 Select a news category:',
-      components: [selectMenuRow],
-      ephemeral: true, // only visible to the user
+      components: [categoryMenu],
+      ephemeral: true,
     });
   },
 };
