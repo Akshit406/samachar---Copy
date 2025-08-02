@@ -2,7 +2,7 @@
 const userCache = new Map();
 
 /**
- * Save user's news session
+ * Save a user's news session
  * @param {string} userId 
  * @param {Array} articles 
  */
@@ -10,21 +10,25 @@ export function setUserSession(userId, articles) {
   userCache.set(userId, {
     articles,
     index: 0,
-    lastInteraction: Date.now()
+    lastInteraction: Date.now(),
   });
 }
 
 /**
- * Get user's current session
+ * Get a user's current session
  * @param {string} userId 
  * @returns {Object|null}
  */
 export function getUserSession(userId) {
-  return userCache.get(userId) || null;
+  const session = userCache.get(userId);
+  if (!session || !Array.isArray(session.articles) || session.articles.length === 0) {
+    return null;
+  }
+  return session;
 }
 
 /**
- * Advance to next article for user
+ * Advance to the next article in the user's session
  * @param {string} userId 
  * @returns {Object|null}
  */
@@ -38,7 +42,7 @@ export function nextArticle(userId) {
 }
 
 /**
- * Clear a user's session
+ * Clear a user's session completely
  * @param {string} userId 
  */
 export function clearUserSession(userId) {
@@ -46,7 +50,7 @@ export function clearUserSession(userId) {
 }
 
 /**
- * Update existing user's session data
+ * Update a user's session with new data (merging)
  * @param {string} userId 
  * @param {Object} newData 
  */
@@ -57,6 +61,6 @@ export function updateUserSession(userId, newData) {
   userCache.set(userId, {
     ...session,
     ...newData,
-    lastInteraction: Date.now()
+    lastInteraction: Date.now(),
   });
 }
