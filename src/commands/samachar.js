@@ -1,5 +1,3 @@
-// commands/samachar.js
-
 import { SlashCommandBuilder } from 'discord.js';
 import { createCategorySelectMenu } from '../components/categorySelectMenu.js';
 

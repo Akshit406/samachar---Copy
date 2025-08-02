@@ -1,4 +1,3 @@
-// components/newsEmbed.js
 
 import { EmbedBuilder } from 'discord.js';
 
