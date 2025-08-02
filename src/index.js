@@ -3,6 +3,8 @@ import dotenv from 'dotenv';
 import path from 'path';
 import fs from 'fs';
 
+import './server.js';
+
 import { handleCategorySelect } from './interactions/handleCategorySelect.js';
 import { handlePagination } from './interactions/handlePagination.js';
 import { categories } from './config/categories.js';
