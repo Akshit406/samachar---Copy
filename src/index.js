@@ -75,4 +75,6 @@ client.once(Events.ClientReady, () => {
   console.log(`🤖 ${client.user.tag} is online!`);
 });
 
-client.login(process.env.DISCORD_TOKEN);
+client.login(process.env.DISCORD_TOKEN)
+  .then(() => console.log("🟢 Bot logged in successfully!"))
+  .catch((err) => console.error("❌ Bot login failed:", err));
