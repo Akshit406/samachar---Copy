@@ -11,7 +11,7 @@ const BASE_URL = 'https://inshorts.com/api/en/search/trending_topics';
  */
 export const fetchArticlesByCategory = async (category, userId) => {
   try {
-    const url = `${BASE_URL}/${category}?page=1&type=NEWS_CATEGORY`;
+    const url = `${BASE_URL}/${category}?page=1&type=NEWS_CATEGORY&max_limit=20`;
     const response = await axios.get(url);
 
     const suggestedNews = response?.data?.data?.suggested_news;
