@@ -12,4 +12,4 @@ jobs:
 
     steps:
       - name: Run cURL on Website
-        run: curl -I https://samachar-30nx.onrender.com
+        run: curl -I https://samachar-oquv.onrender.com
