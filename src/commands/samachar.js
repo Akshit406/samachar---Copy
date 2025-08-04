@@ -12,7 +12,6 @@ export default {
     await interaction.reply({
       content: '🗂 Select a news category:',
       components: [categoryMenu],
-      ephemeral: true,
     });
   },
 };

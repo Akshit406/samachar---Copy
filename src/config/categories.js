@@ -1,5 +1,5 @@
 export const categories = {
-  health: 'health',
+  health: 'Health___Fitness',
   education: 'education',
   fashion: 'fashion',
   miscellaneous: 'miscellaneous',
@@ -14,5 +14,4 @@ export const categories = {
   politics: 'politics',
   business: 'business',
   national: 'national',
-  top_stories: 'top_stories', // fallback category
 };
